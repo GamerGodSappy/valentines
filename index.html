@@ -8,8 +8,9 @@
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      background-color: pink; /* Changed background color to pink */
+      background-color: pink; /* Set background color to pink */
       padding: 20px;
+      margin: 0;
     }
     h1 {
       font-size: 2em;
@@ -32,16 +33,14 @@
       cursor: pointer;
       text-decoration: none;
       transition: all 0.3s ease;
+      white-space: nowrap; /* Ensures button text doesn't overflow */
     }
     .yes-button {
       background-color: #28a745;
-      font-size: 1.2em;
     }
     .no-button {
       background-color: #dc3545;
-      font-size: 1.2em;
-      width: 120px; /* Fixed width */
-      height: 50px; /* Fixed height */
+      padding: 10px 25px; /* Adjusted padding for text to fit */
     }
     .no-button:hover {
       background-color: #c82333;
@@ -56,7 +55,7 @@
   
   <!-- Image section -->
   <div class="image-container">
-    <img id="gifImage" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHRjd2oyM24wYWJjYXM4emRudXhtOHBwMnRmOGFvY2w1Mm51cXcxZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/htb4CXVRUGfZipETud/giphy.gif" alt="Valentine's GIF" />
+    <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHRjd2oyM24wYWJjYXM4emRudXhtOHBwMnRmOGFvY2w1Mm51cXcxZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/htb4CXVRUGfZipETud/giphy.gif" alt="Valentine's GIF" width="300" />
   </div>
   
   <div class="button-container">
@@ -99,7 +98,7 @@
 
     yesButton.addEventListener("click", () => {
       // Change the GIF when the Yes button is clicked
-      gifImage.src = "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcWxxMjVsbXVnOTRrdTBhdW5zb2JyYTRlbmYyYWJ2eW8xNTN6OGVhNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Sfmdpu9FS8qUTFOhe7/giphy.gif";
+      gifImage.src = "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHRjd2oyM24wYWJjYXM4emRudXhtOHBwMnRmOGFvY2w1Mm51cXcxZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/htb4CXVRUGfZipETud/giphy.gif";
     });
   </script>
 </body>
