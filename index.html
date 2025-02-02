@@ -9,7 +9,7 @@
             font-family: 'Arial', sans-serif;
             text-align: center;
             background-color: #ffcccb;
-            color: #fff;
+            color: white;
         }
         h1 {
             font-size: 3em;
@@ -54,25 +54,33 @@
     <button id="yesBtn" class="button" onclick="yesClicked()">Yes!</button>
     <button id="noBtn" class="button" onclick="noClicked()">No!</button>
     <div id="sweetMessages">
-        <p>Are you sure? Here are some sweet things I have to say...</p>
-        <ul>
-            <li>You're the most amazing person I've ever met.</li>
-            <li>Every moment with you is a gift.</li>
-            <li>I would love to make you smile every day.</li>
-            <li>You're my favorite person in the world!</li>
-            <li>Let’s make this a Valentine’s to remember forever!</li>
-        </ul>
-        <button class="button" onclick="yesClicked()">Okay, I’ll be your Valentine!</button>
+        <p id="sweetMessageText">Are you sure? Here's something sweet...</p>
     </div>
 
     <script>
+        const messages = [
+            "You're the most amazing person I've ever met.",
+            "Every moment with you is a gift.",
+            "I would love to make you smile every day.",
+            "You're my favorite person in the world!",
+            "Let’s make this a Valentine’s to remember forever!"
+        ];
+
+        let messageIndex = 0;
+
         function yesClicked() {
             document.getElementById("yesBtn").classList.add("larger");
             alert("I’m so happy you said yes!");
         }
 
         function noClicked() {
-            document.getElementById("sweetMessages").style.display = "block";
+            if (messageIndex < messages.length) {
+                document.getElementById("noBtn").textContent = messages[messageIndex];
+                messageIndex++;
+            } else {
+                document.getElementById("sweetMessages").style.display = "block";
+                document.getElementById("noBtn").textContent = "Okay, I’ll be your Valentine!";
+            }
         }
     </script>
 </body>
