@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,11 +36,44 @@
         .button:hover {
             background-color: #ff4f7b;
         }
+        #sweetMessages {
+            display: none;
+            font-size: 1.2em;
+            margin-top: 20px;
+            color: pink;
+        }
+        .larger {
+            font-size: 1.5em;
+            padding: 20px 35px;
+        }
     </style>
 </head>
 <body>
     <h1>Will you be my Valentine?</h1>
     <p class="heart">❤️</p>
-    <button class="button" onclick="alert('I’m so happy you said yes!')">Yes!</button>
+    <button id="yesBtn" class="button" onclick="yesClicked()">Yes!</button>
+    <button id="noBtn" class="button" onclick="noClicked()">No!</button>
+    <div id="sweetMessages">
+        <p>Are you sure? Here are some sweet things I have to say...</p>
+        <ul>
+            <li>You're the most amazing person I've ever met.</li>
+            <li>Every moment with you is a gift.</li>
+            <li>I would love to make you smile every day.</li>
+            <li>You're my favorite person in the world!</li>
+            <li>Let’s make this a Valentine’s to remember forever!</li>
+        </ul>
+        <button class="button" onclick="yesClicked()">Okay, I’ll be your Valentine!</button>
+    </div>
+
+    <script>
+        function yesClicked() {
+            document.getElementById("yesBtn").classList.add("larger");
+            alert("I’m so happy you said yes!");
+        }
+
+        function noClicked() {
+            document.getElementById("sweetMessages").style.display = "block";
+        }
+    </script>
 </body>
 </html>
