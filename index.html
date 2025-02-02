@@ -11,72 +11,131 @@
       background-color: pink; /* Background stays pink */
       padding: 20px;
       margin: 0;
+      transition: background-color 0.5s ease;
     }
+
     h1 {
-      font-size: 2em;
+      font-size: 2.5em;
       margin-bottom: 30px;
+      color: #ff3366;
+      text-shadow: 2px 2px 5px rgba(255, 0, 0, 0.5);
+      animation: bounceIn 1s ease-in-out;
     }
+
     .image-container {
       margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeIn 2s ease-in-out forwards;
     }
+
     .button-container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
+      gap: 15px;
       margin-top: 20px;
     }
+
     .button {
-      padding: 10px 20px;
-      font-size: 1.2em;
+      padding: 15px 30px;
+      font-size: 1.3em;
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 10px;
       cursor: pointer;
       text-decoration: none;
-      transition: all 0.3s ease;
-      width: auto;
+      transition: all 0.3s ease-in-out;
       min-width: 200px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
+
     .yes-button {
       background-color: #28a745;
-      font-size: 1.2em;
-      transition: all 0.2s ease-in-out;
     }
+
     .no-button {
       background-color: #dc3545;
-      padding: 10px 25px;
-      transition: all 0.2s ease-in-out;
     }
+
+    .yes-button:hover {
+      background-color: #218838;
+      transform: scale(1.1);
+    }
+
+    .no-button:hover {
+      background-color: #c82333;
+      transform: scale(1.1);
+    }
+
     .hidden {
       display: none; /* Hide elements with this class */
     }
-    .no-button:hover {
-      background-color: #c82333;
-    }
-    .yes-button:hover {
-      background-color: #218838;
-    }
+
     .extra-button {
       background-color: #007bff;
     }
+
     .extra-button:hover {
       background-color: #0056b3;
+      transform: scale(1.1);
     }
+
+    /* Fade-in and Bounce Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes bounceIn {
+      0% { transform: translateY(-50px); opacity: 0; }
+      50% { transform: translateY(20px); opacity: 1; }
+      100% { transform: translateY(0); }
+    }
+
+    /* Confetti animation */
+    @keyframes confetti {
+      0% { opacity: 0; transform: translateY(0) rotate(0deg); }
+      100% { opacity: 1; transform: translateY(400px) rotate(720deg); }
+    }
+
+    .confetti {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 999;
+      pointer-events: none;
+      display: none;
+    }
+
+    .confetti div {
+      width: 10px;
+      height: 10px;
+      background-color: red;
+      animation: confetti 2s infinite;
+      opacity: 0;
+    }
+
+    .valentine-message {
+      margin-top: 20px;
+      font-size: 1.5em;
+      color: #ff3366;
+      font-weight: bold;
+      text-align: center;
+    }
+
   </style>
 </head>
 <body>
   <h1>Will you be my Valentine?</h1>
-  
+
   <!-- Image section -->
   <div class="image-container">
     <img id="gifImage" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHRjd2oyM24wYWJjYXM4emRudXhtOHBwMnRmOGFvY2w1Mm51cXcxZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/htb4CXVRUGfZipETud/giphy.gif" alt="Valentine's GIF" width="300" />
-    <!-- Custom Images, hidden initially -->
     <img id="customImage1" class="hidden" src="your_custom_image1.jpg" alt="Custom Image 1" width="300" />
-    <br> <!-- Break to separate images -->
+    <br> 
     <img id="customImage2" class="hidden" src="your_custom_image2.jpg" alt="Custom Image 2" width="300" />
   </div>
-  
+
   <div class="button-container">
     <button id="yesButton" class="button yes-button">Yes</button>
     <button id="noButton" class="button no-button">No</button>
@@ -87,6 +146,18 @@
     <button id="valentineMessage" class="button extra-button">Valentine's Paragraph</button>
     <button id="otherButton1" class="button extra-button">Another Option</button>
     <button id="otherButton2" class="button extra-button">Something Fun</button>
+    <button id="homeButton" class="button extra-button">Home</button> <!-- New Home button -->
+  </div>
+
+  <!-- Confetti Animation (Hidden initially) -->
+  <div id="confetti" class="confetti">
+    <div></div><div></div><div></div><div></div><div></div>
+  </div>
+
+  <!-- Valentine's Paragraph Section (Initially hidden) -->
+  <div id="valentineParagraph" class="valentine-message hidden">
+    <p>Hi ❤️</p>
+    <p>You make my days brighter and my heart warmer. I'm so lucky to have you in my life. Thank you for being my Valentine! 💕</p>
   </div>
 
   <script>
@@ -96,6 +167,9 @@
     const customImage1 = document.getElementById("customImage1");
     const customImage2 = document.getElementById("customImage2");
     const valentineMessage = document.getElementById("valentineMessage");
+    const valentineParagraph = document.getElementById("valentineParagraph");
+    const confetti = document.getElementById("confetti");
+    const homeButton = document.getElementById("homeButton");
 
     const noTexts = [
       "Are you sure?",
@@ -110,7 +184,7 @@
       "I Will give you a million kisses",
       "PLEASE BABE"
     ];
-    
+
     let noClickCount = 0;
 
     noButton.addEventListener("click", () => {
@@ -136,37 +210,22 @@
 
       // Show extra buttons
       extraButtons.classList.remove("hidden");
+
+      // Trigger confetti effect
+      confetti.style.display = "block";
+      setTimeout(() => {
+        confetti.style.display = "none"; // Hide confetti after some time
+      }, 3000);
     });
 
     valentineMessage.addEventListener("click", () => {
-      // Open a new page with the Valentine's paragraph
-      const newWindow = window.open("", "_blank");
-      newWindow.document.write(`
-        <html>
-          <head>
-            <title>My Valentine Message</title>
-            <style>
-              body {
-                background-color: pink;
-                font-family: Arial, sans-serif;
-                text-align: center;
-                padding: 20px;
-              }
-              h1 {
-                font-size: 2em;
-                color: red;
-              }
-              p {
-                font-size: 1.5em;
-              }
-            </style>
-          </head>
-          <body>
-            <h1>Hi ❤️</h1>
-            <p>You make my days brighter and my heart warmer. I'm so lucky to have you in my life. Thank you for being my Valentine! 💕</p>
-          </body>
-        </html>
-      `);
+      // Show the Valentine's message paragraph on the same page
+      valentineParagraph.classList.remove("hidden");
+    });
+
+    homeButton.addEventListener("click", () => {
+      // Reset the page to its initial state
+      window.location.reload();  // This reloads the page, effectively resetting everything
     });
   </script>
 </body>
