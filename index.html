@@ -59,6 +59,8 @@
   <!-- Image section -->
   <div class="image-container">
     <img id="gifImage" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHRjd2oyM24wYWJjYXM4emRudXhtOHBwMnRmOGFvY2w1Mm51cXcxZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/htb4CXVRUGfZipETud/giphy.gif" alt="Valentine's GIF" width="300" />
+    <!-- Custom JPG Image, hidden initially -->
+    <img id="customImage" class="hidden" src="your_custom_image.jpg" alt="Custom Image" width="300" />
   </div>
   
   <div class="button-container">
@@ -70,6 +72,7 @@
     const yesButton = document.getElementById("yesButton");
     const noButton = document.getElementById("noButton");
     const gifImage = document.getElementById("gifImage");
+    const customImage = document.getElementById("customImage");
 
     const noTexts = [
       "Are you sure?",
@@ -106,6 +109,9 @@
 
       // Display the image after "Yes" button is clicked
       gifImage.src = "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcWxxMjVsbXVnOTRrdTBhdW5zb2JyYTRlbmYyYWJ2eW8xNTN6OGVhNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Sfmdpu9FS8qUTFOhe7/giphy.gif";
+      
+      // Show the custom JPG image
+      customImage.classList.remove("hidden");
     });
   </script>
 </body>
