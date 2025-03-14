@@ -50,6 +50,28 @@
     <button class="button green-button" onclick="goToParagraphPage()">Read Love Paragraphs</button>
   </div>
   
+  <div id="gamePage" class="hidden">
+    <h1>Will you be my Valentine?</h1>
+    <div class="image-container">
+      <img src="https://media2.giphy.com/media/htb4CXVRUGfZipETud/giphy.gif" width="300" />
+    </div>
+    <button id="yesButton" class="button green-button">Yes</button>
+    <button id="noButton" class="button red-button">No</button>
+  </div>
+  
+  <div id="yesPage" class="hidden">
+    <h1>YAY! ❤️</h1>
+    <div class="image-container">
+      <img src="https://media2.giphy.com/media/htb4CXVRUGfZipETud/giphy.gif" width="300" />
+      <img src="custom1.jpg" alt="Custom Image 1" width="300" />
+    </div>
+    <button class="button green-button" onclick="goToValentineMessage()">See Your Valentine’s Message</button>
+  </div>
+  
+  <div id="valentinePage" class="hidden" style="background-color: pink; height: 100vh;">
+    <h1>Hi, You’re the best Valentine ever! 💕</h1>
+  </div>
+  
   <div id="paragraphPage" class="hidden">
     <h1>Choose a Love Paragraph</h1>
     <button class="button green-button" onclick="showParagraph('p1')">P1</button>
@@ -86,6 +108,34 @@
     function showParagraph(id) {
       document.getElementById("paragraphPage").classList.add("hidden");
       document.getElementById(id).classList.remove("hidden");
+    }
+
+    const yesButton = document.getElementById("yesButton");
+    const noButton = document.getElementById("noButton");
+    const noTexts = [
+      "Are you sure?", "What if I asked really nicely?", "Pretty Please", "What if I give you Buldak?",
+      "What about a burrito bowl?", "PLEASE POOKIE", "WHY NOT", "I'm Gonna Die If you don't say yes",
+      "Yep I'm Dead", "I Will give you a million kisses", "PLEASE BABE"
+    ];
+    let noClickCount = 0;
+    
+    noButton.addEventListener("click", () => {
+      const currentSize = parseFloat(getComputedStyle(yesButton).fontSize);
+      yesButton.style.fontSize = (currentSize * 1.5) + "px";
+      if (noClickCount < noTexts.length) {
+        noButton.textContent = noTexts[noClickCount];
+        noClickCount++;
+      }
+    });
+    
+    yesButton.addEventListener("click", () => {
+      document.getElementById("gamePage").classList.add("hidden");
+      document.getElementById("yesPage").classList.remove("hidden");
+    });
+    
+    function goToValentineMessage() {
+      document.getElementById("yesPage").classList.add("hidden");
+      document.getElementById("valentinePage").classList.remove("hidden");
     }
   </script>
 </body>
